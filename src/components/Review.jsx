@@ -1,8 +1,8 @@
-import React from 'react'
+import StarsComponent from "./StarsComponent"
 
-const Review = ({ review, showUser = true, showBook = false, showBoth = false, myReview = false }) => {
+const Review = ({ review, showUser = true, showBook = false, showBoth = false, myReview = false, editable = false }) => {
   return (
-    <div className="card mb-3 shadow-sm w-100" style={{ maxWidth: '100%', borderRadius: '1rem' }}>
+    <div className="card p-2 mb-3 shadow-sm" style={{ borderRadius: '1rem' }}>
       <div className="card-body">
         <div className="d-flex align-items-center justify-content-between mb-2">
           <div className="d-flex align-items-center">
@@ -13,11 +13,20 @@ const Review = ({ review, showUser = true, showBook = false, showBoth = false, m
               </>
             )}
             {!showBoth && showBook && <span className="fw-bold">{review.bookTitle}</span>}
-            {!showBoth && showUser && !showBook && ((!myReview)? <span className="text-muted">{review.userName}</span> : <h5>Your Review:</h5>)}
+            {!showBoth && showUser && !showBook && ((!myReview)? <h5>{review.userName}</h5> : <h5>Your Review:</h5>)}
           </div>
-          <span className="badge bg-primary ms-2" style={{ fontSize: '1.1rem' }}>{review.rating} ★</span>
+          {editable && <div style={{cursor: 'pointer', marginLeft: '10px', display: 'flex'}}>
+                <h6 className="me-3">
+                    <i className="fa-solid fa-pen-to-square"></i>
+                </h6>
+                <h6 className="me-3"><i className="fa-solid fa-trash"></i></h6>
+                {/* <h6 className="me-3"><i className="fa-solid fa-trash-arrow-up"></i></h6> */}
+          </div>}
         </div>
-        <p className="card-text" style={{ fontSize: '1.05rem' }}>{review.comment}</p>
+        <div className="fa-2x mb-3">
+          <StarsComponent rating={review.rating} />
+        </div>
+        <p>{review.comment}</p>
       </div>
     </div>
   )

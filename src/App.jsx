@@ -9,51 +9,43 @@ import LoginComponent from "./components/LoginComponent";
 
 function App() {
   return (
-    <div className="m-3">
+    <div className="ms-5 me-5 m-3">
       <h2 className="text-center">Digital Bookstore Management</h2>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/all"
-            element={
-              <RouteCheckComponent>
+        <RouteCheckComponent>
+          <HomeComponent />
+          <Routes>
+            <Route
+              path="/all"
+              element={
+                // <RouteCheckComponent>
                 <ViewAllReviews />
-              </RouteCheckComponent>
-            }
-          />
-          <Route
-            path="/book"
-            element={
-              <RouteCheckComponent>
+              }
+            />
+            <Route
+              path="/book"
+              element={
+                // <RouteCheckComponent>
                 <BookReviewsComponent />
-              </RouteCheckComponent>
-            }
-          />
-          <Route
-            path="/user"
-            element={
-              <RouteCheckComponent>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                // <RouteCheckComponent>
                 <UserReviewsComponent />
-              </RouteCheckComponent>
-            }
-          />
-          {/* <Route
-            path="/login"
-            element={
-              <RouteCheckComponent>
-                <LoginComponent />
-              </RouteCheckComponent>
-            }
-          /> */}
-          <Route
-            path="/*"
-            element={
-              <RouteCheckComponent>
-                <HomeComponent/>
-              </RouteCheckComponent>
-            }
-          />
-        </Routes>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RouteCheckComponent>
+                  <LoginComponent />
+                </RouteCheckComponent>
+              }
+            />
+          </Routes>
+        </RouteCheckComponent>
       </BrowserRouter>
     </div>
   );
