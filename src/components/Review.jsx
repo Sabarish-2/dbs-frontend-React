@@ -1,6 +1,14 @@
 import StarsComponent from "./StarsComponent"
+import { deleteReview } from "../services/ReviewService"
+
 
 const Review = ({ review, showUser = true, showBook = false, showBoth = false, myReview = false, editable = false }) => {
+  const deleteThisReview = () => {
+      if (confirm("Are you sure you want to delete your review?")){
+        deleteReview(review.reviewId);
+        window.location.reload();
+      }
+    }
   return (
     <div className="card p-2 mb-3 shadow-sm" style={{ borderRadius: '1rem' }}>
       <div className="card-body">
@@ -19,7 +27,7 @@ const Review = ({ review, showUser = true, showBook = false, showBoth = false, m
                 <h6 className="me-3">
                     <i className="fa-solid fa-pen-to-square"></i>
                 </h6>
-                <h6 className="me-3"><i className="fa-solid fa-trash"></i></h6>
+                <h6 className="me-3" onClick={deleteThisReview} ><i className="fa-solid fa-trash"></i></h6>
                 {/* <h6 className="me-3"><i className="fa-solid fa-trash-arrow-up"></i></h6> */}
           </div>}
         </div>

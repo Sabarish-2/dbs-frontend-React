@@ -14,7 +14,7 @@ const AddReviewComponent = ({setUserReview, bookId}) => {
     
     addReview(review).then((response) => {
         console.log(response.data);
-        setUserReview(review);
+        setUserReview(response.data);
       }).catch((error) => {
         console.error("Error adding review:", error);
       })
