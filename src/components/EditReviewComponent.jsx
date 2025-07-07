@@ -2,9 +2,9 @@ import { useState } from "react";
 import StarsComponent from "./StarsComponent";
 import { addReview } from "../services/ReviewService";
 
-const AddReviewComponent = ({setUserReview, bookId}) => {
-  const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(0);
+const EditReviewComponent = ({setUserReview, bookId, review}) => {
+  const [comment, setComment] = useState(review ? review.comment : "");
+  const [rating, setRating] = useState(review ? review.rating : 0);
   const [errors, setErrors] = useState({ rating: "", comment: "" });
 
   const handleEnter = () => {}
@@ -34,6 +34,7 @@ const AddReviewComponent = ({setUserReview, bookId}) => {
     } else {
       errorsTemp.comment = "";
     }
+    setErrors(errorsTemp);
     return valid;
   }
 
@@ -82,6 +83,7 @@ const AddReviewComponent = ({setUserReview, bookId}) => {
               <label htmlFor="reviewComment" className="form-label"><strong>Comment:</strong></label>
               <textarea
                 className={`form-control` + (errors.comment) && ` is-invalid`}
+                value={comment}
                 id="reviewComment"
                 placeholder="Your Comment Here!"
                 onChange={(e) => {
@@ -100,4 +102,4 @@ const AddReviewComponent = ({setUserReview, bookId}) => {
   );
 };
 
-export default AddReviewComponent;
+export default EditReviewComponent;

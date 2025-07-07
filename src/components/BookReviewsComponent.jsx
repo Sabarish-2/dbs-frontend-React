@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAverageBookRating, getBookReviews, getBooks } from "../services/ReviewService";
 import Review from "./Review";
 import StarsComponent from "./StarsComponent";
-import AddReviewComponent from "./AddReviewComponent";
+import EditReviewComponent from "./EditReviewComponent";
 
 const BookReviewsComponent = () => {
   const [books, setBooks] = useState([]);
@@ -12,9 +12,13 @@ const BookReviewsComponent = () => {
   const [bookSelected, setBookSelected] = useState('');
   const [textInPlaceOfReviews, setTextInPlaceOfReviews] = useState("Loading...");
   const [averageRating, setAverageRating] = useState([]);
+  const [editing, setEditing] = useState(true);
+
   useEffect(() => {
-    if (typeof reviews !== "string")
+    if (typeof reviews !== "string") {
       setUserReview(reviews.find((review) => Number(userId) === review.userId));
+      setEditing(false);
+    }
   }, [reviews]);
 
   useEffect(() => {
@@ -41,7 +45,6 @@ const BookReviewsComponent = () => {
                 .then((response) => {
                   setReviews(response.data);
                   setTextInPlaceOfReviews("No Reviews found!");
-                  // setBookSelected(true);
                   setBookSelected(e.target.value);
                 })
                 .catch((error) => {
@@ -82,16 +85,17 @@ const BookReviewsComponent = () => {
               </div>
             </div>
           )}
-          {userReview ? (
+          {userReview && !editing ? (
             <Review
               key={userReview.reviewId}
               review={userReview}
               showUser="true"
               myReview="true"
               editable="true"
+              setEditing={setEditing}
             />
           ) : (
-            bookSelected && <AddReviewComponent setUserReview={setUserReview} bookId={bookSelected} />
+            bookSelected && editing && <EditReviewComponent review={userReview} setUserReview={setUserReview} bookId={bookSelected} />
           )}
           {reviews
             .filter((review) => Number(userId) !== review.userId)
