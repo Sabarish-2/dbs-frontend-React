@@ -2,7 +2,7 @@ import { useState } from "react";
 import StarsComponent from "./StarsComponent";
 import { addReview } from "../services/ReviewService";
 
-const EditReviewComponent = ({setUserReview, bookId, review}) => {
+const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
   const [comment, setComment] = useState(review ? review.comment : "");
   const [rating, setRating] = useState(review ? review.rating : 0);
   const [errors, setErrors] = useState({ rating: "", comment: "" });
@@ -93,8 +93,9 @@ const EditReviewComponent = ({setUserReview, bookId, review}) => {
               {errors.comment && <div className="invalid-feedback">{errors.comment}</div>}
             </div>
             <button type="submit" className="btn btn-success" onClick={(e) => submitReview(e)}>
-              Add Review
+              { review ? <>Update Review</> : <>Add Review</>}
             </button>
+            {review && <button type="button" className="btn btn-danger ms-2" onClick={() => setEditing(false)}>Cancel</button>}
           </form>
         </div>
       </div>

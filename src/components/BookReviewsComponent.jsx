@@ -17,7 +17,7 @@ const BookReviewsComponent = () => {
   useEffect(() => {
     if (typeof reviews !== "string") {
       setUserReview(reviews.find((review) => Number(userId) === review.userId));
-      setEditing(false);
+      setEditing(!reviews.find((review) => Number(userId) === review.userId));
     }
   }, [reviews]);
 
@@ -95,7 +95,7 @@ const BookReviewsComponent = () => {
               setEditing={setEditing}
             />
           ) : (
-            bookSelected && editing && <EditReviewComponent review={userReview} setUserReview={setUserReview} bookId={bookSelected} />
+            bookSelected && editing && <EditReviewComponent review={userReview} setUserReview={setUserReview} bookId={bookSelected} setEditing={setEditing} />
           )}
           {reviews
             .filter((review) => Number(userId) !== review.userId)
