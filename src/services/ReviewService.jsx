@@ -6,8 +6,9 @@ const REVIEW_BASE_URL = API_BASE_URL + "review/";
 
 const userId = sessionStorage.getItem("userId");
 
-export const getBooks = () => axios.get(API_BASE_URL + "books");
 export const getUsers = () => axios.get(USER_BASE_URL + "user/users");
+export const getBooks = () => axios.get(API_BASE_URL + "books");
+export const getBookByID = (bookID) => axios.get(API_BASE_URL + "books/" + bookID);
 
 export const getReviews = () => axios.get(REVIEW_BASE_URL + "all");
 export const getBookReviews = (bookID) => axios.get(REVIEW_BASE_URL + "book/" + bookID);
@@ -15,4 +16,5 @@ export const getAverageBookRating = (bookID) => axios.get(REVIEW_BASE_URL + "boo
 export const getUserReviews = () => axios.get(REVIEW_BASE_URL + "user/" + userId);
 
 export const addReview = (review) => axios.post(REVIEW_BASE_URL + "add", review);
+export const updateReview = (review) => axios.put(REVIEW_BASE_URL + "update/" + userId, review);
 export const deleteReview = (reviewId) => axios.delete(REVIEW_BASE_URL + "delete/" + userId + "/" + reviewId);

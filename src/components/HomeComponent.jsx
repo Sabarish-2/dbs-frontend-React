@@ -1,35 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Review from "./Review";
+import { getBooks } from "../services/ReviewService";
+import ShortBookCard from "./Book/ShortBookCard";
 
 const HomeComponent = () => {
   const navigator = useNavigate();
+  const [bookID, setBookID] = useState("");
+  const [books, setBooks] = useState([]);
 
-  const navigate = (path) => () => navigator(path);
+  useEffect(() => {
+    getBooks().then((response) => {setBooks(response.data)})
+      .catch((error) => {console.error(error);
+    });
+  }, []);
 
   return (
-    <>
-      <div className="text-center">
-        <button className="btn btn-primary m-3" onClick={navigate("/all")}>
-          All Reviews
-        </button>
-        <button className="btn btn-primary m-3" onClick={navigate("/book")}>
-          Book Reviews
-        </button>
-        <button className="btn btn-primary m-3" onClick={navigate("/user")}>
-          User Reviews
-        </button>
-        <button
-          className="btn btn-danger m-3"
-          onClick={() => {
-            sessionStorage.removeItem("userId");
-            window.location.reload();
-          }}
-        >
-          Log Out
-        </button>
-      </div>
-    </>
+    <div>
+    {books.map((book) => <div onClick={() => navigator('/book/' + book.bookID)} key={book.bookID} ><ShortBookCard book={book} setBookID={setBookID} /> </div>)}
+    </div>
   );
 };
 

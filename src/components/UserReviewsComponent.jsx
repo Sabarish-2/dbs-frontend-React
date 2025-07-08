@@ -26,7 +26,7 @@ const UserReviewsComponent = () => {
       (
         <>
           {reviews.map((review) => (
-            <Review key={review.reviewId} review={review} showBook="true" />
+            <Review key={review.reviewId} review={review} showBook="true" editable='true' />
           ))}
         </>
       )}
