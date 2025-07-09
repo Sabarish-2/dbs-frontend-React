@@ -5,7 +5,8 @@ import { deleteReview } from "../services/ReviewService"
 const Review = ({ review, showUser = true, showBook = false, showBoth = false, myReview = false, editable = false, setEditing }) => {
   const deleteThisReview = () => {
       if (confirm("Are you sure you want to delete your review?")){
-        deleteReview(review.reviewId);
+        deleteReview(review.reviewId).then((response) => {
+        });
         window.location.reload();
       }
     }
@@ -24,7 +25,7 @@ const Review = ({ review, showUser = true, showBook = false, showBoth = false, m
             {!showBoth && showUser && !showBook && ((!myReview)? <h5>{review.userName}</h5> : <h5>Your Review:</h5>)}
           </div>
           {editable && <div style={{cursor: 'pointer', marginLeft: '10px', display: 'flex'}}>
-                <h6 className="me-3" onClick={() => setEditing(true)}><i className="fa-solid fa-pen-to-square"></i></h6>
+                {!showBoth && showUser && !showBook && <h6 className="me-3" onClick={() => setEditing(true)}><i className="fa-solid fa-pen-to-square"></i></h6>}
                 <h6 className="me-3" onClick={deleteThisReview} ><i className="fa-solid fa-trash"></i></h6>
                 {/* <h6 className="me-3"><i className="fa-solid fa-trash-arrow-up"></i></h6> */}
           </div>}

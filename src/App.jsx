@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ViewAllReviews from "./components/ViewAllReviewsComponent";
 import HomeComponent from "./components/HomeComponent";
-import BookReviewsComponent from "./components/BookReviewsComponent";
 import UserReviewsComponent from "./components/UserReviewsComponent";
 import RouteCheckComponent from "./components/RouteCheckComponent";
-import LoginComponent from "./components/LoginComponent";
+import ViewBookComponent from "./components/Book/ViewBookComponent";
+import NavbarComponent from "./components/NavbarComponent";
 
 function App() {
   return (
@@ -13,37 +13,14 @@ function App() {
       <h2 className="text-center">Digital Bookstore Management</h2>
       <BrowserRouter>
         <RouteCheckComponent>
-          <HomeComponent />
+          <NavbarComponent />
           <Routes>
-            <Route
-              path="/all"
-              element={
-                // <RouteCheckComponent>
-                <ViewAllReviews />
-              }
-            />
-            <Route
-              path="/book"
-              element={
-                // <RouteCheckComponent>
-                <BookReviewsComponent />
-              }
-            />
-            <Route
-              path="/user"
-              element={
-                // <RouteCheckComponent>
-                <UserReviewsComponent />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <RouteCheckComponent>
-                  <LoginComponent />
-                </RouteCheckComponent>
-              }
-            />
+            <Route path="/all" element={<ViewAllReviews />} />
+            <Route path="/book/:bookID" element={<ViewBookComponent />} />
+            <Route path="/user" element={<UserReviewsComponent />} />
+            <Route path="/home" element={<HomeComponent />} />
+            <Route path="/" element={<HomeComponent />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </RouteCheckComponent>
       </BrowserRouter>
