@@ -9,6 +9,15 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
 
   const handleEnter = () => {}
 
+  // handleEnter(event: KeyboardEvent): void {
+    //     if (event.key === 'Enter') {
+    //         if (!this.formData.invalid) {
+    //             this.onSubmit(this.formData.value);
+    //         }
+    //         event.preventDefault();
+    //     }
+    // }
+
   const validateForm = () => {
     let valid = true;
     const errorsTemp = {... errors};
