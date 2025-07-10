@@ -4,20 +4,22 @@ import { getUsers } from "../services/ReviewService";
 
 const LoginComponent = () => {
   const [users, setUsers] = useState([]);
+  const [textInPlaceOfUsers, setTextInPlaceOfUsers] = useState("Loading...")
   useEffect(() => {
     getUsers()
-      .then((response) => setUsers(response.data.ourUsersList))
+      .then((response) => {
+        setUsers(response.data.ourUsersList);
+        setTextInPlaceOfUsers("No Users Found");
+      })
       .catch((error) => console.error(error));
   }, []);
-
-  const navigator = useNavigate();
 
   return (
     <>
       <div className="container mt-5"></div>
       <h3 className="mb-4">Select a User to Login</h3>
       <div className="list-group">
-        {users.map((user) => (
+        {users.length ? users.map((user) => (
           <button
             key={user.userId}
             className="list-group-item list-group-item-action"
@@ -29,7 +31,7 @@ const LoginComponent = () => {
           >
             {user.name}
           </button>
-        ))}
+        )) : <h4>{textInPlaceOfUsers}</h4>}
       </div>
     </>
   );
