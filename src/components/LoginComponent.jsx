@@ -17,8 +17,19 @@ const LoginComponent = () => {
   return (
     <>
       <div className="container mt-5"></div>
-      <h3 className="mb-4">Select a User to Login</h3>
       <div className="list-group">
+      <h3 className="list-group-item">Select a User to Login</h3>
+        <button
+          className="list-group-item list-group-item-action"
+          onClick={() => {
+            sessionStorage.setItem("Admin", "Yes");
+            window.location.reload();
+          }
+          }
+          style={{ cursor: "pointer", fontWeight: 500 }}
+        >
+          <strong>Administrator</strong>
+        </button>
         {users.length ? users.map((user) => (
           <button
             key={user.userId}

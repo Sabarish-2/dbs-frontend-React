@@ -11,9 +11,6 @@ const NavbarComponent = () => {
         <button className="btn btn-primary m-3" onClick={navigate("/home")}>
           Home
         </button>
-        <button className="btn btn-primary m-3" onClick={navigate("/all")}>
-          All Reviews
-        </button>
         <button className="btn btn-primary m-3" onClick={navigate("/user")}>
           My Reviews
         </button>
@@ -21,6 +18,7 @@ const NavbarComponent = () => {
           className="btn btn-danger m-3"
           onClick={() => {
             sessionStorage.removeItem("userId");
+            sessionStorage.removeItem("Admin");
             window.location.reload();
           }}
         >

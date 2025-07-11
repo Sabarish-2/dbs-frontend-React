@@ -2,25 +2,20 @@ import { useState } from "react";
 import StarsComponent from "./StarsComponent";
 import { addReview, updateReview } from "../services/ReviewService";
 
-const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
+const EditReviewComponent = ({ setUserReview, bookId, review, setEditing }) => {
   const [comment, setComment] = useState(review ? review.comment : "");
   const [rating, setRating] = useState(review ? review.rating : 0);
   const [errors, setErrors] = useState({ rating: "", comment: "" });
 
-  const handleEnter = () => {}
-
-  // handleEnter(event: KeyboardEvent): void {
-    //     if (event.key === 'Enter') {
-    //         if (!this.formData.invalid) {
-    //             this.onSubmit(this.formData.value);
-    //         }
-    //         event.preventDefault();
-    //     }
-    // }
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      submitReview(event);
+    }
+  }
 
   const validateForm = () => {
     let valid = true;
-    const errorsTemp = {... errors};
+    const errorsTemp = { ...errors };
     if (rating == 0) {
       errorsTemp.rating = "Rating is Required!";
       valid = false;
@@ -43,7 +38,7 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
     } else {
       errorsTemp.comment = "";
     }
-    setErrors(errorsTemp);    
+    setErrors(errorsTemp);
     return valid;
   }
 
@@ -53,7 +48,7 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
       return;
     }
     const userId = sessionStorage.getItem("userId");
-    const newReview = {reviewId: review? review.reviewId : 0, rating: rating, comment: comment, userId: userId, bookId: bookId};
+    const newReview = { reviewId: review ? review.reviewId : 0, rating: rating, comment: comment, userId: userId, bookId: bookId };
     if (review) {
       updateReview(newReview).then((response) => {
         setUserReview(response.data);
@@ -69,8 +64,8 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
         console.error("Error adding review:", error);
       })
     }
-    }
-  
+  }
+
   function handleRatingClick(event, starValue) {
     const rect = event.target.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
@@ -93,9 +88,9 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
           </div>
           <form>
             <div className="fa-2x">
-                <StarsComponent handleRatingClick={handleRatingClick} rating={rating} />
+              <StarsComponent handleRatingClick={handleRatingClick} rating={rating} />
             </div>
-              {errors.rating && <div className="text-danger mb-3">{errors.rating}</div>}
+            {errors.rating && <div className="text-danger mb-3">{errors.rating}</div>}
             <div className="mb-3">
               <label htmlFor="reviewComment" className="form-label"><strong>Comment:</strong></label>
               <textarea
@@ -103,14 +98,15 @@ const EditReviewComponent = ({setUserReview, bookId, review, setEditing}) => {
                 value={comment}
                 id="reviewComment"
                 placeholder="Your Comment Here!"
+                onKeyDown={handleEnter}
                 onChange={(e) => {
                   setComment(e.target.value);
                 }}
-                ></textarea>
+              ></textarea>
               {errors.comment && <div className="invalid-feedback">{errors.comment}</div>}
             </div>
             <button type="submit" className="btn btn-success" onClick={(e) => submitReview(e)}>
-              { review ? <>Update Review</> : <>Add Review</>}
+              {review ? <>Update Review</> : <>Add Review</>}
             </button>
             {review && <button type="button" className="btn btn-danger ms-2" onClick={() => setEditing(false)}>Cancel</button>}
           </form>

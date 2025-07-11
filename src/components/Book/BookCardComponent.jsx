@@ -17,7 +17,6 @@ const BookCardComponent = () => {
   useEffect(() => {
     getBookByID(bookID)
       .then((response) => {
-        console.log(response.data);
         setBook(response.data);
         getAverageBookRating(bookID)
           .then((response) => setAverageRating(response.data))
@@ -36,11 +35,11 @@ const BookCardComponent = () => {
     <div>
       {book ? (
         <div className="card mb-3">
-          <div className="row g-0 m-3">
-            <div className="col-md-4">
+          <div className="row g-0 m-2">
+            <div className="col-md-4 d-flex align-items-center justify-content-center">
               <img
                 src={`data:image/jpeg;base64,${book.coverImage}`}
-                className="w-50 img-fluid rounded-start"
+                className="w-50 img-fluid rounded"
                 alt={book.title}
               />
             </div>
@@ -51,7 +50,7 @@ const BookCardComponent = () => {
                 <p className="card-text">Genre: {book.categoryName}</p>
                 <p className="card-text">Price: ₹{book.price}</p>
                 <p className="card-text">Description: {book.description}</p>
-                {averageRating.length != 0 && (
+                {averageRating[0] != 0 && (
                   //   <div className="d-flex justify-content-center">
                   <strong>
                     <p>

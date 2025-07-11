@@ -18,8 +18,10 @@ const BookReviewsComponent = () => {
     .then((response) => {
       setReviews(response.data);
       setTextInPlaceOfReviews("No Reviews found!");
-      setUserReview(response.data.find((review) => Number(userId) === review.userId));
-      setEditing(!response.data.find((review) => Number(userId) === review.userId));
+      if (typeof response.data != 'string') {
+        setUserReview(response.data.find((review) => Number(userId) === review.userId));
+        setEditing(!response.data.find((review) => Number(userId) === review.userId));
+      }
       })
       .catch((error) => {
         console.error(error);

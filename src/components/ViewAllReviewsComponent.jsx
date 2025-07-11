@@ -20,7 +20,7 @@ const ViewAllReviews = () => {
 
   return (
     <>
-      <h3>All Reviews</h3>
+      <h3 className="ms-2">All Reviews</h3>
       {(typeof reviews !== 'string' && reviews.length != 0)? reviews.map((review) => (
         <Review key={review.reviewId} review={review} showBoth='true' />
       )) : <h5>{textInPlaceOfReviews}</h5>}

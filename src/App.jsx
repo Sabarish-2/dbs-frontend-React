@@ -1,6 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import ViewAllReviews from "./components/ViewAllReviewsComponent";
 import HomeComponent from "./components/HomeComponent";
 import UserReviewsComponent from "./components/UserReviewsComponent";
 import RouteCheckComponent from "./components/RouteCheckComponent";
@@ -15,7 +14,6 @@ function App() {
         <RouteCheckComponent>
           <NavbarComponent />
           <Routes>
-            <Route path="/all" element={<ViewAllReviews />} />
             <Route path="/book/:bookID" element={<ViewBookComponent />} />
             <Route path="/user" element={<UserReviewsComponent />} />
             <Route path="/home" element={<HomeComponent />} />

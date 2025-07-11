@@ -9,14 +9,28 @@ const HomeComponent = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    getBooks().then((response) => {setBooks(response.data)})
-      .catch((error) => {console.error(error);
-    });
+    getBooks()
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
-    <div>
-    {books.map((book) => <div onClick={() => navigator('/book/' + book.bookID)} key={book.bookID} ><ShortBookCard book={book} setBookID={setBookID} /> </div>)}
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, minmax(200px, 1fr))",
+        gap: "14px",
+      }}
+    >
+      {books.map((book) => (
+        <div onClick={() => navigator("/book/" + book.bookID)} key={book.bookID}>
+          <ShortBookCard book={book} setBookID={setBookID} />
+        </div>
+      ))}
     </div>
   );
 };
