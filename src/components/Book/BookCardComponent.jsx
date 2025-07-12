@@ -34,7 +34,7 @@ const BookCardComponent = () => {
   return (
     <div>
       {book ? (
-        <div className="card mb-3">
+        <div className="card mb-3 bg-light">
           <div className="row g-0 m-2">
             <div className="col-md-4 d-flex align-items-center justify-content-center">
               <img

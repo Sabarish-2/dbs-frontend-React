@@ -1,7 +1,7 @@
 const ShortBookCard = ({book, setBookID}) => {
   return (
     <div onClick={() => setBookID(book.bookID)}>
-        <div className="card">
+        <div className="card bg-light">
             <div className="row m-3">
             <div className="text-center p-0">
                 <img

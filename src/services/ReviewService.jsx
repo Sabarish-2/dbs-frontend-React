@@ -18,3 +18,7 @@ export const getUserReviews = () => axios.get(REVIEW_BASE_URL + "user/" + userId
 export const addReview = (review) => axios.post(REVIEW_BASE_URL + "add", review);
 export const updateReview = (review) => axios.put(REVIEW_BASE_URL + "update/" + userId, review);
 export const deleteReview = (reviewId) => axios.delete(REVIEW_BASE_URL + "delete/" + userId + "/" + reviewId);
+
+export const getDeletedReviews = () => axios.get(REVIEW_BASE_URL + "review_delete");
+export const deleteReviewAdmin = (review) => axios.post(REVIEW_BASE_URL + "review_delete", review);
+export const restoreReviewAdmin = (reviewId) => axios.delete(REVIEW_BASE_URL + "review_delete/" + userId + "/" + reviewId);

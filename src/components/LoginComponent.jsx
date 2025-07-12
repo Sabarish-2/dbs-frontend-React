@@ -23,6 +23,7 @@ const LoginComponent = () => {
           className="list-group-item list-group-item-action"
           onClick={() => {
             sessionStorage.setItem("Admin", "Yes");
+            sessionStorage.setItem("userId", "1");
             window.location.reload();
           }
           }
