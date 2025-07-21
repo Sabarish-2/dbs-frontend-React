@@ -16,9 +16,8 @@ const LoginComponent = () => {
 
   return (
     <>
-      <div className="container mt-5"></div>
-      <div className="list-group">
-      <h3 className="list-group-item">Select a User to Login</h3>
+      <div className="mt-1 list-group">
+      <h4 className="list-group-item">Select a User to Login</h4>
         <button
           className="list-group-item list-group-item-action"
           onClick={() => {

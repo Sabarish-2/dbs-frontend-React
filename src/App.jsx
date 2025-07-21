@@ -9,10 +9,9 @@ import NavbarComponent from "./components/NavbarComponent";
 function App() {
   return (
     <div className="ms-5 me-5 m-3">
-      <h2 className="text-center">Digital Bookstore Management</h2>
       <BrowserRouter>
+        <NavbarComponent />
         <RouteCheckComponent>
-          <NavbarComponent />
           <Routes>
             <Route path="/book/:bookID" element={<ViewBookComponent />} />
             <Route path="/user" element={<UserReviewsComponent />} />

@@ -32,30 +32,30 @@ const BookReviewsComponent = () => {
   return (
     <>
       <h4>Reviews:</h4>
+      {userReview && !editing ? (
+        <Review
+          key={userReview.reviewId}
+          review={userReview}
+          showUser="true"
+          myReview="true"
+          editable="true"
+          setEditing={setEditing}
+        />
+      ) : (
+        editing && (
+          <EditReviewComponent
+            review={userReview}
+            setUserReview={setUserReview}
+            bookId={bookID}
+            userId={userId}
+            setEditing={setEditing}
+          />
+        )
+      )}
       {typeof reviews === "string" || reviews.length == 0 ? (
         <h5>{textInPlaceOfReviews}</h5>
       ) : (
         <>
-          {userReview && !editing ? (
-            <Review
-              key={userReview.reviewId}
-              review={userReview}
-              showUser="true"
-              myReview="true"
-              editable="true"
-              setEditing={setEditing}
-            />
-          ) : (
-            editing && (
-              <EditReviewComponent
-                review={userReview}
-                setUserReview={setUserReview}
-                bookId={bookID}
-                userId={userId}
-                setEditing={setEditing}
-              />
-            )
-          )}
           {reviews
             .filter((review) => Number(userId) !== review.userId)
             .map((review) => (
