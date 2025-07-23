@@ -52,7 +52,7 @@ const Review = ({ review, showUser = true, showBook = false, showBoth = false, m
             {!showBoth && showUser && !showBook && ((!myReview)? <h5>{review.userName}</h5> : <h5>Your Review:</h5>)}
           </div>
           {(editable || showBoth) && <div style={{cursor: 'pointer', marginLeft: '10px', display: 'flex'}}>
-                {!showBoth &&  <h6 className="me-3" onClick={() => setEditing(true)}><i className="fa-solid fa-pen-to-square"></i></h6>}
+                {!showBoth && !showBook &&  <h6 className="me-3" onClick={() => setEditing(true)}><i className="fa-solid fa-pen-to-square"></i></h6>}
                 {!review.reason && <h6 className="me-3" onClick={deleteThisReview} ><i className="fa-solid fa-trash"></i></h6>}
                 {review.reason && <h6 className="me-3" onClick={() => setShowRestoreModal(true)} ><i className="fa-solid fa-trash-arrow-up"></i></h6>}
           </div>}
