@@ -1,12 +1,51 @@
-# React + Vite
+# dbs-frontend-React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Lightweight React frontend for the Digital BookStore project. This repository contains the single-page application used to interact with the DBS backend (API, auth, data flows) from https://github.com/Sabarish-2/DigitalBookStore-Backend.
 
-Currently, two official plugins are available:
+## Features
+- React-based UI
+- Environment-driven API endpoint configuration
+- Opinionated folder structure for scalable components and services
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project working
+- Single-page app: client-side routing (React Router or equivalent) handles navigation without full page reloads.
+- API communication: services layer centralizes REST/HTTP calls to REACT_APP_API_URL; use fetch/axios and a shared error/response handler.
+- Data flow: components call services/hooks to fetch/update data. Use React Query / SWR or custom caching to reduce requests and simplify loading/error states.
+- UI state: local component state for transient UI; context or state management (Redux/Context) for global application state (auth, user, feature flags).
+- Error handling & UX: global error boundary for render errors, centralized toast/notification for API errors and success messages.
+- Security & CORS: backend must allow CORS for the configured REACT_APP_API_URL.
 
-## Expanding the ESLint configuration
+## Prerequisites
+- Node.js >= 16
+- npm >= 8 or Yarn
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Available scripts
+- npm start / yarn start — start dev server with hot reload
+- npm run build / yarn build — create production build in `build/` or `dist/`
+- npm test / yarn test — run unit tests
+- npm run lint / yarn lint — run linter (ESLint)
+- npm run format / yarn format — format code (Prettier)
+
+## Current folder structure
+- src/
+  - components/       — presentational and shared components
+  - pages/            — route-level pages
+  - services/         — API calls, auth, data layer
+  - hooks/            — reusable hooks
+  - context/          — React context providers
+  - assets/           — images, fonts, styles
+  - utils/            — helpers, constants
+  - App.jsx/tsx       — app entry
+  - index.jsx/tsx     — render and global providers
+
+## Building & Deployment
+- Build: npm run build
+- Serve static build with any static server or host on Netlify, or a container.
+
+## Troubleshooting
+- If the app fails to fetch data, verify REACT_APP_API_URL and CORS on the backend.
+- For build issues, clear node_modules and reinstall:
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
